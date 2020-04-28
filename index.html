@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Pacifico&display=swap" rel="stylesheet">
+  <title>Movie Search</title>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>MovieSearch</h1>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <form class="form">
+        <input class="form__input" type="text" placeholder="Search for a movie" autofocus spellcheck="false">
+        <button class="form__btn--submit" type="submit">Search</button>
+        <span data-name="Clear" class="form__clear tooltip"></span>
+        <span data-name="Keyboard" class="form__keyboard tooltip"></span>
+      </form>
+      <p class="info">Sorry, no movies for your request</p>
+    </div>
+    <div class="slider-container">
+      <div class="container">
+        <div class="glide">
+          <div class="glide__track" data-glide-el="track">
+           
+            <ul class="glide__slides">
+              <li class="glide__slide">
+                <div class="slide__container">
+                  <p class="slide__title">Movie title</p>
+                  <img class="slide__poster" src="https://m.media-amazon.com/images/M/MV5BOTdiNzJlOWUtNWMwNS00NmFlLWI0YTEtZmI3YjIzZWUyY2Y3XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg" alt="">
+                  <p class="slide__year">2009</p>
+                  <div class="slide__rate">7.7</div>
+                </div>
+               
+              </li>
+              <li class="glide__slide">
+                <div class="slide__container">
+                  <p class="slide__title">Movie title</p>
+                  <img class="slide__poster" src="https://m.media-amazon.com/images/M/MV5BMTI1NDg1NTY2N15BMl5BanBnXkFtZTcwNDY2MTU1MQ@@._V1_SX300.jpg" alt="">
+                  <p class="slide__year">2009</p>
+                  <div class="slide__rate">7.7</div>
+                </div>
+               
+              </li>
+              <li class="glide__slide">
+                <div class="slide__container">
+                  <p class="slide__title">Movie title</p>
+                  <img class="slide__poster" src="https://m.media-amazon.com/images/M/MV5BOTdiNzJlOWUtNWMwNS00NmFlLWI0YTEtZmI3YjIzZWUyY2Y3XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg" alt="">
+                  <p class="slide__year">2009</p>
+                  <div class="slide__rate">7.7</div>
+                </div>
+               
+              </li>
+              <li class="glide__slide">
+                <div class="slide__container">
+                  <p class="slide__title">Movie title</p>
+                  <img class="slide__poster" src="https://m.media-amazon.com/images/M/MV5BOTdiNzJlOWUtNWMwNS00NmFlLWI0YTEtZmI3YjIzZWUyY2Y3XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg" alt="">
+                  <p class="slide__year">2009</p>
+                  <div class="slide__rate">7.7</div>
+                </div>
+               
+              </li>
+             
+            </ul>
+  
+          </div>
+          <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+          </div>
+          <div class="glide__bullets" data-glide-el="controls[nav]">
+            <button class="glide__bullet" data-glide-dir="=0"></button>
+            <button class="glide__bullet" data-glide-dir="=1"></button>
+            <button class="glide__bullet" data-glide-dir="=2"></button>
+            <button class="glide__bullet" data-glide-dir="=3"></button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <a class="footer__github">GitHub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

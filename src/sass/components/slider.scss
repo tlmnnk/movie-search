@@ -1,0 +1,57 @@
+.slider-container {
+  position: relative;
+  margin-top: 100px;
+}
+.slide {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    user-select: none;
+
+    
+  }
+  &__title {
+    margin-bottom: 15px;
+  }
+  &__poster {
+    height: 445px;
+    background-size: cover;
+    user-select: none;
+  }
+  &__year {
+    margin-top: 15px;
+  }
+  &__rate {
+    margin-top: 5px;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      background-image: url("../../img/star.svg");
+      width: 24px;
+      height: 24px;
+      top: -3px;
+      left: -30px;
+    }
+  }
+}
+.glide__slide {
+  background-color: transparent;
+}
+.glide__arrow {
+  transition: all .3s ease-out;
+  background: linear-gradient(90deg,#ed145b 0,#7b31f4);
+
+  &--left {
+    left: -1rem;
+  }
+  &--right {
+    right: -1rem;
+  }
+}
+.glide__bullets {
+  bottom: -2rem;
+}

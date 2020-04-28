@@ -1,0 +1,36 @@
+.form {
+  display: flex;
+  justify-content: center;
+  font-family: 'Pacifico', cursive;
+
+  &__input {
+    font-family: 'Bangers', cursive;
+    padding: 25px;
+    width: 50%;
+    height: 40px;
+    font-size: 2.5rem;
+    color: #fff;
+    letter-spacing: 3px;
+    background: transparent;
+    border: none;
+    border-bottom: 4px solid #743ad5;
+    outline: none;
+  }
+
+  &__btn--submit {
+    width: 100px;
+    margin-left: 15px;
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    background: $prime-gradient;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease-out;
+    outline: none;
+
+    &:hover {
+      transform: translate(4px, 4px);
+    }
+  }
+}
