@@ -9,29 +9,12 @@ import config from '../config/apiConfig';
 class Api {
   constructor(config) {
     this.url = config.url;
+    this.apiKey = config.apiKey;
   }
-  async countries() {
+  async searchMovies(searchInput) {
     try {
-      const response = await axios.get(`${this.url}/countries`);
-      return response.data;
-    } catch (err) {
-      console.log(err);
-      return Promise.reject(err);
-    }
-  }
-  async cities() {
-    try {
-      const response = await axios.get(`${this.url}/cities`);
-      return response.data;
-    } catch (err) {
-      console.log(err);
-      return Promise.reject(err);
-    }
-  }
-  async prices(params) {
-    try {
-      const response = await axios.get(`${this.url}/prices/cheap`, {
-        params,
+      const response = await axios.get(`${this.url}${this.apiKey}`, {
+        's': searchInput,
       });
       return response.data;
     } catch (err) {
