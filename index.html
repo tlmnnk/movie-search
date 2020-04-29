@@ -8,17 +8,15 @@
 </head>
 <body>
   <header class="header">
-    <div class="container">
-      <h1>MovieSearch</h1>
-    </div>
+    <h1 class="header__title">MovieSearch</h1>
   </header>
   <main>
     <div class="container">
       <form class="form">
         <input class="form__input" type="text" placeholder="Search for a movie" autofocus spellcheck="false">
         <button class="form__btn--submit" type="submit">Search</button>
-        <span data-name="Clear" class="form__clear tooltip"></span>
-        <span data-name="Keyboard" class="form__keyboard tooltip"></span>
+        <span data-name="Clear" class="form__clear form__tooltip" title="clear"></span>
+        <span data-name="Keyboard" class="form__keyboard form__tooltip" title="keyboard"></span>
       </form>
       <p class="info">Sorry, no movies for your request</p>
     </div>
