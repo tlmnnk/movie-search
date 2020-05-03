@@ -1,4 +1,4 @@
-import api from '../service/apiService';
+import api from '../service/apiServiceOMDB';
 
 class MoviesStore {
   constructor(api) {

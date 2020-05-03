@@ -1,4 +1,5 @@
 import '../plugins';
+import clearInputBtn from '../views/clearInputBtn';
 import info from '../views/info';
 import formUI from '../views/form';
 import movieUI from '../views/moviesView';
@@ -17,6 +18,14 @@ export default class App {
   init() {
     this.slider = new glideSlider();
     this.formSubmitInit();
+    this.initEventListeners();
+  }
+
+  initEventListeners() {
+    document.addEventListener('click', (e) => {
+      
+      clearInputBtn.clearInputTextHandler(e, this.forUI.input);
+    });
   }
 
   formSubmitInit() {
