@@ -20,6 +20,11 @@
     height: 445px;
     background-size: cover;
     user-select: none;
+    object-fit: scale-down;
+
+    @include media-mobie-mini {
+      height: 400px;
+    }
   }
   &__year {
     margin-top: 15px;
@@ -54,4 +59,13 @@
 }
 .glide__bullets {
   bottom: -2rem;
+}
+.glide__track {
+  min-height: 500px;
+}
+
+.glide__slides {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

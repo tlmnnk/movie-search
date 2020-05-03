@@ -14,7 +14,7 @@ module.exports = (env, options) => {
     'source-map',
     // suorce-map required for resolve-url-loader
     watch: !isProduction,
-    entry: ['./src/js/index.js', './src/sass/style.scss'],
+    entry: ['@babel/polyfill', './src/js/index.js', './src/sass/style.scss'],
     output: {
       filename: 'app.js',
       path: path.join(__dirname, './dist'),

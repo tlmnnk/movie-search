@@ -1,3 +1,14 @@
-import './plugins';
+//import './plugins';
+import App from './controller/app';
 
-console.log('Hello');
+
+document.addEventListener('DOMContentLoaded', () => {
+  // const valueInput = document.querySelector('.form__input').value
+  // form.addEventListener('submit', () => {
+  //  moviesStore.searchMovies(valueInput);
+  // });
+  //moviesStore.searchMovies();
+
+  new App().init();
+
+});
