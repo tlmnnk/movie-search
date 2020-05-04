@@ -5,16 +5,20 @@ class MoviesStore {
     this.api = api;
     this.searchResult = null;
     this.fullDescMovies = null;
+    this.currentSearch = 'movie';
+    this.currentPage = 0;
   }
 
   async init() {
-    const response = await this.api.searchMovies('day');
+    const response = await this.api.searchMovies(this.currentSearch);
+    console.log(response);
     this.searchResult = response;
   }
 
   async searchMovies(movieTitle, page) {
     const response = await this.api.searchMovies(movieTitle, page);
     this.searchResult = response.Search;
+    console.log(response);
     if (this.searchResult) {
       this.fullDescMovies = await this.getFullDescMovies(this.searchResult);
     } else { 
@@ -30,6 +34,7 @@ class MoviesStore {
       let rating = fullDescMovie.Ratings[0].Value;
       rating = rating.slice(0, rating.indexOf('/'));
       const tempObj = {
+        'titleLink': `https://www.imdb.com/title/${fullDescMovie.imdbID}`,
         'title': fullDescMovie.Title,
         'year' : fullDescMovie.Year,
         'poster': fullDescMovie.Poster,

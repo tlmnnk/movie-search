@@ -19,6 +19,11 @@ module.exports = (env, options) => {
       filename: 'app.js',
       path: path.join(__dirname, './dist'),
     },
+    resolve: {
+      alias: {
+          '@': path.resolve(__dirname, './src'),
+      }
+    },
     module: {
       rules: [
         {

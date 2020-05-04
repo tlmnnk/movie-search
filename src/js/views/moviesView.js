@@ -1,6 +1,8 @@
+import mySwiper from '../plugins/swiper';
+
 class MoviesUI {
   constructor() {
-    this.moviesContainer = document.querySelector('.glide__slides');
+    this.moviesContainer = document.querySelector('.swiper-wrapper');
   }
 
   renderSliderMovieItems(slides) {
@@ -9,17 +11,18 @@ class MoviesUI {
       fragment += this.renderSlide(slide);
     });
     this.moviesContainer.insertAdjacentHTML('afterbegin', fragment);
+    mySwiper.update();
   }
 
   renderSlide(slide) {
-    return `<li class="glide__slide">
+    return `<div class="swiper-slide">
     <div class="slide__container">
-      <p class="slide__title">${slide.title}</p>
-      <img class="slide__poster" src="${slide.poster}" alt="">
+      <a href="${slide.titleLink}" class="slide__title" target="_blank">${slide.title}</a>
+      <img class="slide__poster swiper-lazy" src="${slide.poster}" alt="">
       <p class="slide__year">${slide.year}</p>
       <div class="slide__rate">${slide.rating}</div>
     </div>
-  </li>`;
+  </div>`;
   }
 
   clearSliderContainer() {
@@ -28,10 +31,6 @@ class MoviesUI {
         this.moviesContainer.removeChild(this.moviesContainer.lastChild);
       }
     }
-  }
-  
-  renderLoader() {
-    this.moviesContainer.insertAdjacentHTML('afterbegin', '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
   }
 }
 

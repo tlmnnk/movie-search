@@ -4,7 +4,6 @@ import info from '../views/info';
 import formUI from '../views/form';
 import movieUI from '../views/moviesView';
 import moviesStore from '../store/movieStore';
-import glideSlider from '../plugins/glideSlider';
 
 
 export default class App {
@@ -16,9 +15,17 @@ export default class App {
   }
 
   init() {
-    this.slider = new glideSlider();
+    this.startUpPageInit();
     this.formSubmitInit();
     this.initEventListeners();
+  }
+
+  async startUpPageInit() {
+    movieUI.clearSliderContainer();
+    info.renderLoader();
+    const currentSearchReponse = await moviesStore.searchMovies('day');
+    info.deleteLoader();
+    this.movieUI.renderSliderMovieItems(currentSearchReponse);
   }
 
   initEventListeners() {
@@ -38,26 +45,24 @@ export default class App {
 
   async onFormSubmit() {
     const userInputValue = formUI.inputValue;
-    
     info.clearInfoText();
     if (this.slider) {
-      this.slider.destroy();
+      //this.slider.destroy();
       this.slider = null;
     }
+    info.renderLoader();
     this.movieUI.clearSliderContainer();
-
-    this.movieUI.renderLoader();
+    
     const currentSearchReponse = await moviesStore.searchMovies(userInputValue);
     console.log('currentSearchReponse = ' + currentSearchReponse);
-    this.movieUI.clearSliderContainer();
+    info.deleteLoader();
 
     if (!currentSearchReponse) {
       info.setInfoText(userInputValue);
       return;
     }
-
     this.movieUI.renderSliderMovieItems(currentSearchReponse);
-    this.slider = new glideSlider();
+    //this.slider = new glideSlider();
     console.log(currentSearchReponse);
   }
 }

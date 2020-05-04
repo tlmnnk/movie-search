@@ -1,1 +1,1 @@
-import glideSlider from './glideSlider';
+import mySwiper from './swiper';

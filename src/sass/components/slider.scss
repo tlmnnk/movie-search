@@ -10,8 +10,6 @@
     align-items: center;
     font-size: 2rem;
     user-select: none;
-
-    
   }
   &__title {
     margin-bottom: 15px;
@@ -43,29 +41,16 @@
     }
   }
 }
-.glide__slide {
-  background-color: transparent;
+.swiper-container {
+  min-height: 600px;
 }
-.glide__arrow {
-  transition: all .3s ease-out;
-  background: linear-gradient(90deg,#ed145b 0,#7b31f4);
-
-  &--left {
-    left: -1rem;
-  }
-  &--right {
-    right: -1rem;
-  }
+.swiper-button-prev, .swiper-button-next {
+  outline: none;
 }
-.glide__bullets {
-  bottom: -2rem;
+.swiper-pagination {
+  position: inherit;
 }
-.glide__track {
-  min-height: 500px;
-}
-
-.glide__slides {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.swiper-pagination-bullet {
+  background: #fff;
+  margin-right: 5px;
 }
