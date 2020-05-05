@@ -3,7 +3,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 module.exports = (env, options) => {
   const isProduction = options.mode === 'production';
@@ -52,12 +51,36 @@ module.exports = (env, options) => {
           ],
         },
         {
-          test: /\.(png|svg|jpe?g|gif|mp3)$/i,
+          test: /\.(png|svg|jpe?g|gif)$/i,
           use: [
             {
               loader: 'file-loader',
             },
-          ],
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                mozjpeg: {
+                  progressive: true,
+                  quality: 65
+                },
+                // optipng.enabled: false will disable optipng
+                optipng: {
+                  enabled: false,
+                },
+                pngquant: {
+                  quality: [0.65, 0.90],
+                  speed: 4
+                },
+                gifsicle: {
+                  interlaced: false,
+                },
+                // the webp option will enable WEBP
+                webp: {
+                  quality: 75
+                }
+              }
+            },
+          ]
         },
         {
           test: /\.html$/i,
@@ -77,12 +100,7 @@ module.exports = (env, options) => {
       new CopyPlugin([
         { from: './src/img', to: './img/' },
       ]),
-      new ImageminPlugin({
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        jpgquant: {
-          quality: '85-90',
-        },
-      }),
+
     ],
     devServer: {
       contentBase: './dist',

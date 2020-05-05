@@ -1,5 +1,5 @@
 const config = {
-  url: 'http://www.omdbapi.com/?',
+  url: 'https://www.omdbapi.com/?',
   apiKey: '7975880b',
 };
 

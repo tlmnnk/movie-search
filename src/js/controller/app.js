@@ -9,11 +9,10 @@ import mySwiper from '../plugins/swiper';
 
 export default class App {
   constructor() {
-    this.slider = null;
     this.forUI = formUI;
     this.movieUI = movieUI;
     this.moviesStore = moviesStore;
-    this.currentSearch = 'movie';
+    this.currentSearch = 'kill bill';
     this.currentPage = 1;
     this.totalSearchResults = null;
   }
@@ -40,16 +39,12 @@ export default class App {
 
   initEventListeners() {
     document.addEventListener('click', (e) => {
-      
       clearInputBtn.clearInputTextHandler(e, this.forUI.input);
     });
+
     mySwiper.on('reachEnd', () => {
       this.loadNextTenMovies();
     });
-  }
-
-  swiperReachEndDetectInit() {
-    
   }
 
   formSubmitInit() {
@@ -61,10 +56,13 @@ export default class App {
   }
 
   async loadNextTenMovies() {
-    if (mySwiper.activeIndex === 1) {
+    console.log('swiper active index');
+    console.log(mySwiper.activeIndex);
+    if ([0, 1].includes(mySwiper.activeIndex)) {
       return;
     }
     if (this.currentPage > Math.floor(this.totalSearchResults / 10)) {
+      info.setInfoText(`No more results for "${this.currentSearch}"`);
       return;
     }
     if (Math.floor(20/10)) {}
@@ -87,12 +85,13 @@ export default class App {
     mySwiper.slideTo(0);
     const currentSearchReponse = await moviesStore.searchMovies(userInputValue);
     this.totalSearchResults = moviesStore.getTotalResults();
-    console.log(this.totalSearchResults);
+    console.log(currentSearchReponse);
 
     info.deleteLoader();
 
     if (!currentSearchReponse) {
-      info.setInfoText(userInputValue);
+      info.setInfoText(`Sorry, no results for "${this.currentSearch}"`);
+      mySwiper.removeAllSlides();
       return;
     }
     this.movieUI.renderSliderMovieItems(currentSearchReponse);

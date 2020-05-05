@@ -2,8 +2,8 @@ class Info {
   constructor() {
     this.infoElement = document.querySelector('.info');
   }
-  setInfoText(search) {
-    this.infoElement.innerText = `Sorry, no movies for your request "${search}"`;
+  setInfoText(text) {
+    this.infoElement.innerText = text;
   }
   
   clearInfoText() {

@@ -12,13 +12,46 @@
     user-select: none;
   }
   &__title {
+    padding: 0 3px;
     margin-bottom: 15px;
+    height: 45px;
+    overflow: hidden;
+
+    &:hover {
+      color: #743ad5;
+    }
   }
   &__poster {
     height: 445px;
     background-size: cover;
     user-select: none;
     object-fit: scale-down;
+
+    &:before { 
+      content: " ";
+      display: block;
+    
+      position: absolute;
+      left: 0;
+      height: calc(100% - 125px);
+      width: 100%;
+      background-color: #e6e6e6;
+      border: 5px dotted rgb(200, 200, 200);
+      border-radius: 5px;
+    }
+    
+    &:after { 
+      content: "Broken Image";
+      display: block;
+      font-size: 16px;
+      color: rgb(100, 100, 100);
+      
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
 
     @include media-mobie-mini {
       height: 400px;
@@ -30,6 +63,7 @@
   &__rate {
     margin-top: 5px;
     position: relative;
+
     &:before {
       content: "";
       position: absolute;
@@ -45,6 +79,7 @@
   min-height: 600px;
 }
 .swiper-button-prev, .swiper-button-next {
+  transform: translateY(-50%);
   user-select: none;
   outline: none;
 }
