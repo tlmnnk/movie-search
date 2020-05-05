@@ -10,6 +10,7 @@ class Info {
     !!this.infoElement.innerText ? this.infoElement.innerText = '' : null;
   }
   renderLoader() {
+    this.clearInfoText();
     this.infoElement.insertAdjacentHTML('afterbegin', '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
   }
   deleteLoader() {

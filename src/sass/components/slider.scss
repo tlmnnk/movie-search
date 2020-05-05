@@ -45,12 +45,9 @@
   min-height: 600px;
 }
 .swiper-button-prev, .swiper-button-next {
+  user-select: none;
   outline: none;
-}
-.swiper-pagination {
-  position: inherit;
 }
 .swiper-pagination-bullet {
   background: #fff;
-  margin-right: 5px;
 }

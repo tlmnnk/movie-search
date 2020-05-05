@@ -5,19 +5,14 @@ class MoviesStore {
     this.api = api;
     this.searchResult = null;
     this.fullDescMovies = null;
-    this.currentSearch = 'movie';
-    this.currentPage = 0;
-  }
-
-  async init() {
-    const response = await this.api.searchMovies(this.currentSearch);
-    console.log(response);
-    this.searchResult = response;
+    this.totalResponseLength = null;
+    this.totalResults = null;
   }
 
   async searchMovies(movieTitle, page) {
     const response = await this.api.searchMovies(movieTitle, page);
     this.searchResult = response.Search;
+    this.totalResults = response.totalResults;
     console.log(response);
     if (this.searchResult) {
       this.fullDescMovies = await this.getFullDescMovies(this.searchResult);
@@ -32,7 +27,7 @@ class MoviesStore {
       const sumArr = await acc;
       const fullDescMovie = await this.api.getMovieByID(movieShortDesc.imdbID);
       let rating = fullDescMovie.Ratings[0].Value;
-      rating = rating.slice(0, rating.indexOf('/'));
+      rating ? rating = rating.slice(0, rating.indexOf('/')) : rating = 'N/A';
       const tempObj = {
         'titleLink': `https://www.imdb.com/title/${fullDescMovie.imdbID}`,
         'title': fullDescMovie.Title,
@@ -44,6 +39,11 @@ class MoviesStore {
       return sumArr;
     }, []);
   }
+
+  getTotalResults() {
+    return this.totalResults;
+  }
+  
 }
 
 const moviesStore  = new MoviesStore(api);

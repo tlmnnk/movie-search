@@ -1,5 +1,3 @@
-import mySwiper from '../plugins/swiper';
-
 class MoviesUI {
   constructor() {
     this.moviesContainer = document.querySelector('.swiper-wrapper');
@@ -10,8 +8,7 @@ class MoviesUI {
     slides.forEach(slide => {
       fragment += this.renderSlide(slide);
     });
-    this.moviesContainer.insertAdjacentHTML('afterbegin', fragment);
-    mySwiper.update();
+    this.moviesContainer.insertAdjacentHTML('beforeend', fragment);
   }
 
   renderSlide(slide) {
