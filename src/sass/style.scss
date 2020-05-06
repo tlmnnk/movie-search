@@ -1,11 +1,11 @@
 @import "./plugins";
 
 @import './abstract/mixins';
-@import "./layout/container.scss";
+@import "./layout/container";
 
-@import "./abstract/constants.scss";
+@import "./abstract/constants";
 
-@import "./base/base.scss";
+@import "./base/base";
 
 // components
 @import "./components/header"; 
@@ -14,3 +14,5 @@
 @import "./components/loader";
 @import "./components/slider"; 
 @import "./components/footer"; 
+
+@import "./base/helpers"; 

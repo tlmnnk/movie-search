@@ -4,6 +4,7 @@ import info from '../views/info';
 import formUI from '../views/form';
 import movieUI from '../views/moviesView';
 import moviesStore from '../store/movieStore';
+import translate from '../store/translate';
 import mySwiper from '../plugins/swiper';
 
 
@@ -25,15 +26,22 @@ export default class App {
   }
 
   async startUpPageInit() {
-    movieUI.clearSliderContainer();
-    info.renderLoader();
-
+    this.preRenderSliderHandler();
     const currentSearchReponse = await moviesStore.searchMovies(this.currentSearch);
-    this.totalSearchResults = moviesStore.getTotalResults();
-    console.log(this.totalSearchResults);
 
+    
+    if (!currentSearchReponse) {
+      info.setInfoText('Something went wrong...');
+      return;
+    }
+    if (currentSearchReponse.Response && !JSON.parse(currentSearchReponse.Response.toLowerCase())) {
+      info.setInfoText(currentSearchReponse.Error);
+      return;
+    }
+    this.totalSearchResults = moviesStore.getTotalResults();
     info.deleteLoader();
     this.movieUI.renderSliderMovieItems(currentSearchReponse);
+    this.imgSmoothLoadHandler();
     mySwiper.update();
   }
 
@@ -55,6 +63,27 @@ export default class App {
     });
   }
 
+  imgSmoothLoadHandler() {
+    document.querySelectorAll('img:not(.load)').forEach((item) => {
+      ['load', 'error'].forEach((event) => {
+        item.addEventListener(event, (e) => {
+          if (!e.target.classList.contains('load')) {
+            e.target.parentNode.classList.add('visible');
+            e.target.classList.add('load');
+          }
+        });
+      });
+    });
+  }
+
+  preRenderSliderHandler() {
+    this.currentPage !== 1 ? this.currentPage = 1 : null;
+    info.renderLoader();
+    this.movieUI.clearSliderContainer();
+    mySwiper.slideTo(0);
+    mySwiper.update();
+  }
+
   async loadNextTenMovies() {
     console.log('swiper active index');
     console.log(mySwiper.activeIndex);
@@ -65,36 +94,53 @@ export default class App {
       info.setInfoText(`No more results for "${this.currentSearch}"`);
       return;
     }
-    if (Math.floor(20/10)) {}
+    
     this.currentPage += 1;
     info.renderLoader();
     const currentSearchReponse = await moviesStore.searchMovies(this.currentSearch, this.currentPage);
  
     this.movieUI.renderSliderMovieItems(currentSearchReponse);
+    this.imgSmoothLoadHandler();
     mySwiper.update();
     info.deleteLoader();
+    if (/[а-яА-Я]/g.test(formUI.inputValue)) info.setInfoText(`Showing result for "${formUI.inputValue}"`);
+  }
+
+  async isRusInput(input) {
+    if (/[а-яА-Я]/g.test(input)) {
+      return translate.translateWord(input);
+    }
   }
 
   async onFormSubmit() {
-    const userInputValue = formUI.inputValue;
-    this.currentPage !== 1 ? this.currentPage = 1 : null;
+    let userInputValue = formUI.inputValue;
+    const translated = await this.isRusInput(userInputValue);
+
+    translated ? userInputValue = translated : null;
+    
     userInputValue !== '' ? this.currentSearch = userInputValue : null;
- 
-    info.renderLoader();
-    this.movieUI.clearSliderContainer();
-    mySwiper.slideTo(0);
+    this.preRenderSliderHandler();
+    
     const currentSearchReponse = await moviesStore.searchMovies(userInputValue);
     this.totalSearchResults = moviesStore.getTotalResults();
     console.log(currentSearchReponse);
 
     info.deleteLoader();
+    translated ? info.setInfoText(`Showing result for "${formUI.inputValue}"`) : null;
 
     if (!currentSearchReponse) {
       info.setInfoText(`Sorry, no results for "${this.currentSearch}"`);
       mySwiper.removeAllSlides();
       return;
     }
+    if (currentSearchReponse.Response && !JSON.parse(currentSearchReponse.Response.toLowerCase())) {
+        info.setInfoText(currentSearchReponse.Error);
+      return;
+    }
+    
+
     this.movieUI.renderSliderMovieItems(currentSearchReponse);
+    this.imgSmoothLoadHandler();
     mySwiper.update();
   }
 }

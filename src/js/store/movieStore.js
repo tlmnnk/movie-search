@@ -11,10 +11,13 @@ class MoviesStore {
 
   async searchMovies(movieTitle, page) {
     const response = await this.api.searchMovies(movieTitle, page);
-    this.searchResult = response.Search;
-    this.totalResults = response.totalResults;
-    console.log(this.searchResult);
-    if (this.searchResult) {
+
+    if (response) {
+      if (!JSON.parse(response.Response.toLowerCase())) {
+        return response;
+      }
+      this.searchResult = response.Search;
+      this.totalResults = response.totalResults;
       this.fullDescMovies = await this.getFullDescMovies(this.searchResult);
     } else { 
       return null; } 

@@ -8,8 +8,8 @@ import config from '../config/apiConfig';
  */
 class Api {
   constructor(config) {
-    this.url = config.url;
-    this.apiKey = config.apiKey;
+    this.url = config.omdb.url;
+    this.apiKey = config.omdb.apiKey;
   }
   async searchMovies(searchInput, page = 1) {
     try {
@@ -23,7 +23,7 @@ class Api {
       return response.data;
     } catch (err) {
       console.log(err);
-      return Promise.reject(err);
+      return false;
     }
   }
   async getMovieByID(movieID) {

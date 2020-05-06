@@ -10,6 +10,8 @@
     align-items: center;
     font-size: 2rem;
     user-select: none;
+    opacity: 0;
+    transition: opacity .9s ease-out;
   }
   &__title {
     padding: 0 3px;
@@ -32,12 +34,12 @@
       display: block;
     
       position: absolute;
-      left: 0;
+      left: 5%;
       height: calc(100% - 125px);
-      width: 100%;
-      background-color: #e6e6e6;
-      border: 5px dotted rgb(200, 200, 200);
-      border-radius: 5px;
+      width: 90%;
+      background-color: #333332;
+      border: 5px dotted #737272;
+      border-radius: 10px;
     }
     
     &:after { 
