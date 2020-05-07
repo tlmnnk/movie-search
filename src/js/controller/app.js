@@ -13,9 +13,10 @@ export default class App {
     this.forUI = formUI;
     this.movieUI = movieUI;
     this.moviesStore = moviesStore;
-    this.currentSearch = 'kill bill';
+    this.currentSearch = 'movie';
     this.currentPage = 1;
     this.totalSearchResults = null;
+    this.isSearchRussian = false;
   }
 
   init() {
@@ -103,11 +104,12 @@ export default class App {
     this.imgSmoothLoadHandler();
     mySwiper.update();
     info.deleteLoader();
-    if (/[а-яА-Я]/g.test(formUI.inputValue)) info.setInfoText(`Showing result for "${formUI.inputValue}"`);
+    if (/[а-яА-Я]/g.test(formUI.inputValue) && this.isSearchRussian) info.setInfoText(`Showing result for "${formUI.inputValue}"`);
   }
 
   async isRusInput(input) {
     if (/[а-яА-Я]/g.test(input)) {
+      this.isSearchRussian = true;
       return translate.translateWord(input);
     }
   }
@@ -116,7 +118,7 @@ export default class App {
     let userInputValue = formUI.inputValue;
     const translated = await this.isRusInput(userInputValue);
 
-    translated ? userInputValue = translated : null;
+    translated ? userInputValue = translated : this.isSearchRussian = false;
     
     userInputValue !== '' ? this.currentSearch = userInputValue : null;
     this.preRenderSliderHandler();

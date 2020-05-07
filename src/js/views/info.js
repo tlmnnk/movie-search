@@ -11,6 +11,9 @@ class Info {
   }
   renderLoader() {
     this.clearInfoText();
+    if (document.querySelector('.lds-ring'))  {
+      return;
+    }
     this.infoElement.insertAdjacentHTML('afterbegin', '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
   }
   deleteLoader() {
