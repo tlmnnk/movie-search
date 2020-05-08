@@ -1,0 +1,75 @@
+.keyboard {
+  width: 910px;
+
+  position: absolute;
+  margin: 0 auto;
+  top: 50%;
+  left: 0;
+  right: 0;
+
+  //visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s ease-in;
+  background: linear-gradient(90deg,#ed145b 0,#7b31f4);
+  border-radius: 10px;
+  user-select: none;
+  z-index: -2;
+
+  @include media-laptop {
+    display: none;
+  }
+
+  &--visible {
+    //visibility: visible;
+    opacity: 1;
+    z-index: 2;
+  }
+}
+
+.row {
+  display: flex;
+}
+.key {
+  margin: 2px;
+  padding: 20px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #212121;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.6rem;
+  cursor: pointer;
+  text-align: center;
+}
+.key--wide {
+  width: 100%;
+}
+.key--shift {
+  width: 150px;
+}
+.key--special {
+  background-color: #31312c;
+  border: 1px solid #743ad5;
+  flex-grow: 1;
+}
+.key--press {
+  -webkit-box-shadow: inset 0px 0px 10px 2px rgb(158, 158, 158);
+  -moz-box-shadow: inset 0px 0px 10px 2px rgb(158, 158, 158);
+  box-shadow: inset 0px 0px 10px 2px rgb(158, 158, 158);
+}
+.key--caps {
+  background-color: #5f9ea0;
+}
+.key:hover {
+  background-color: #000000;
+}
+span[data=MetaLeft] {
+  color: #15ff00;
+}
+span[data=Backspace] {
+  width: 30px;
+}

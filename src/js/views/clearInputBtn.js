@@ -4,9 +4,9 @@ class ClearInputBtn {
   }
   clearInputTextHandler(e, input) {
     if (e.target.classList.contains('form__clear')) {
-      console.log('click...');
       console.log(input);
       input.value = '';
+      input.focus();
     }
   }
 }

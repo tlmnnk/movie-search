@@ -6,6 +6,7 @@ import movieUI from '../views/moviesView';
 import moviesStore from '../store/movieStore';
 import translate from '../store/translate';
 import mySwiper from '../plugins/swiper';
+import keyboard from '../views/keyboard';
 
 
 export default class App {
@@ -23,7 +24,7 @@ export default class App {
     this.startUpPageInit();
     this.formSubmitInit();
     this.initEventListeners();
-    
+    keyboard.init();
   }
 
   async startUpPageInit() {
@@ -49,6 +50,7 @@ export default class App {
   initEventListeners() {
     document.addEventListener('click', (e) => {
       clearInputBtn.clearInputTextHandler(e, this.forUI.input);
+      this.keyBoardIconHandler(e);
     });
 
     mySwiper.on('reachEnd', () => {
@@ -62,6 +64,13 @@ export default class App {
       e.preventDefault();
       this.onFormSubmit();
     });
+  }
+
+  keyBoardIconHandler(e) {
+    if (e.target.classList.contains('form__keyboard')) {
+      keyboard.toggleKeyboard();
+      this.forUI.input.focus();
+    }
   }
 
   imgSmoothLoadHandler() {
@@ -78,6 +87,7 @@ export default class App {
   }
 
   preRenderSliderHandler() {
+    document.querySelector('.keyboard').classList.contains('keyboard--visible') ? document.querySelector('.keyboard').classList.remove('keyboard--visible') : null;
     this.currentPage !== 1 ? this.currentPage = 1 : null;
     info.renderLoader();
     this.movieUI.clearSliderContainer();

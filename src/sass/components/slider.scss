@@ -12,6 +12,7 @@
     user-select: none;
     opacity: 0;
     transition: opacity .9s ease-out;
+
   }
   &__title {
     padding: 0 3px;
@@ -76,6 +77,9 @@
       left: -30px;
     }
   }
+}
+.swiper-slide {
+  position: relative;
 }
 .swiper-container {
   min-height: 600px;

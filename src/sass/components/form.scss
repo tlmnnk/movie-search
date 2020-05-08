@@ -36,7 +36,7 @@
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    transition: all .3s ease-out;
+    transition: all .2s ease-out;
     outline: none;
     user-select: none;
 
@@ -46,12 +46,8 @@
       width: 100%;
     }
     
-
-    &:hover {
-      transform: scale(1.1);
-      @include media-mobile {
-          transform: translateY(5px);
-      }
+    &:active {
+      transform: translate(4px, 4px);
     }
   }
   &__tooltip {
@@ -64,8 +60,8 @@
     cursor: pointer;
     transition: transform .3s ease-out;
     
-    &:hover {
-      transform: scale(1.1);
+    &:active {
+      transform: translate(3px, 3px);
     }
     
     @include media-laptop {
@@ -75,6 +71,8 @@
   &__clear {
     background-image: url("../../img/clear.svg");
     right: 34%;
+    transition: transform .1s ease-in;
+    
 
     @include media-big-display {
       right: 36%;
