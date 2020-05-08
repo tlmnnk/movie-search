@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-shadow */
 import api from '../service/apiServiceOMDB';
 
 class MoviesStore {
@@ -19,24 +21,25 @@ class MoviesStore {
       this.searchResult = response.Search;
       this.totalResults = response.totalResults;
       this.fullDescMovies = await this.getFullDescMovies(this.searchResult);
-    } else { 
-      return null; } 
-    
+    } else {
+      return null;
+    }
+
     return this.fullDescMovies;
   }
 
   async getFullDescMovies(searchResult) {
-      return searchResult.reduce(async (acc, movieShortDesc) => {
+    return searchResult.reduce(async (acc, movieShortDesc) => {
       const sumArr = await acc;
       const fullDescMovie = await this.api.getMovieByID(movieShortDesc.imdbID);
       let rating = fullDescMovie.Ratings[0] ? fullDescMovie.Ratings[0].Value : null;
       rating ? rating = rating.slice(0, rating.indexOf('/')) : rating = 'N/A';
       const tempObj = {
-        'titleLink': `https://www.imdb.com/title/${fullDescMovie.imdbID}`,
-        'title': fullDescMovie.Title,
-        'year' : fullDescMovie.Year,
-        'poster': fullDescMovie.Poster !== 'N/A' ? fullDescMovie.Poster : '',
-        'rating': rating,
+        titleLink: `https://www.imdb.com/title/${fullDescMovie.imdbID}`,
+        title: fullDescMovie.Title,
+        year: fullDescMovie.Year,
+        poster: fullDescMovie.Poster !== 'N/A' ? fullDescMovie.Poster : '',
+        rating,
       };
       sumArr.push(tempObj);
       return sumArr;
@@ -46,9 +49,8 @@ class MoviesStore {
   getTotalResults() {
     return this.totalResults;
   }
-  
 }
 
-const moviesStore  = new MoviesStore(api);
+const moviesStore = new MoviesStore(api);
 
 export default moviesStore;

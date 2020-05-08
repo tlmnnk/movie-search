@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 class MoviesUI {
   constructor() {
     this.moviesContainer = document.querySelector('.swiper-wrapper');
@@ -5,7 +6,7 @@ class MoviesUI {
 
   renderSliderMovieItems(slides) {
     let fragment = '';
-    slides.forEach(slide => {
+    slides.forEach((slide) => {
       fragment += this.renderSlide(slide);
     });
     this.moviesContainer.insertAdjacentHTML('beforeend', fragment);
@@ -24,7 +25,7 @@ class MoviesUI {
 
   clearSliderContainer() {
     if (this.moviesContainer.children.length) {
-      while(this.moviesContainer.firstChild) {
+      while (this.moviesContainer.firstChild) {
         this.moviesContainer.removeChild(this.moviesContainer.lastChild);
       }
     }

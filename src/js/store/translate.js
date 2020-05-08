@@ -1,7 +1,7 @@
 import apiTranslate from '../service/apiServiceYaTranslate';
 
 class Translate {
-  constructor (api) {
+  constructor(api) {
     this.api = api;
   }
 

@@ -1,6 +1,6 @@
 import Swiper from 'swiper';
 
-const mySwiper = new Swiper ('.swiper-container', {
+const mySwiper = new Swiper('.swiper-container', {
   slidesPerView: 4,
   pagination: {
     el: '.swiper-pagination',
@@ -11,15 +11,15 @@ const mySwiper = new Swiper ('.swiper-container', {
   breakpoints: {
     320: {
       slidesPerView: 1,
-      spaceBetween: 10
+      spaceBetween: 10,
     },
     768: {
       slidesPerView: 2,
-      spaceBetween: 20
+      spaceBetween: 20,
     },
     1200: {
       slidesPerView: 4,
-      spaceBetween: 30
+      spaceBetween: 30,
     },
   },
   navigation: {

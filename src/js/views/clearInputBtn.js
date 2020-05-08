@@ -1,10 +1,12 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable class-methods-use-this */
 class ClearInputBtn {
-  constructor () {
+  constructor() {
     this.clearBtn = document.querySelector('.from__clear');
   }
+
   clearInputTextHandler(e, input) {
     if (e.target.classList.contains('form__clear')) {
-      console.log(input);
       input.value = '';
       input.focus();
     }

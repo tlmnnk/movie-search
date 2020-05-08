@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import axios from 'axios';
 import config from '../config/apiConfig';
 
@@ -11,18 +12,18 @@ class ApiTranslate {
     this.url = config.yandex.url;
     this.apiKey = config.yandex.apiKey;
   }
+
   async translateWord(word) {
     try {
       const response = await axios.get(`${this.url}`, {
         params: {
-          'key': this.apiKey,
-          'text': word,
-          'lang': 'ru-en'
-        }
+          key: this.apiKey,
+          text: word,
+          lang: 'ru-en',
+        },
       });
       return response.data;
     } catch (err) {
-      console.log(err);
       return false;
     }
   }

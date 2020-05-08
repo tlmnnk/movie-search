@@ -1,3 +1,6 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-unused-expressions */
 import '../plugins';
 import clearInputBtn from '../views/clearInputBtn';
 import info from '../views/info';
@@ -31,7 +34,7 @@ export default class App {
     this.preRenderSliderHandler();
     const currentSearchReponse = await moviesStore.searchMovies(this.currentSearch);
 
-    
+
     if (!currentSearchReponse) {
       info.setInfoText('Something went wrong...');
       return;
@@ -54,8 +57,10 @@ export default class App {
       this.keyboardEnterClick(e);
     });
 
-    mySwiper.on('reachEnd', () => {
-      this.loadNextTenMovies();
+    mySwiper.on('slideChange', () => {
+      if (mySwiper.activeIndex === ((this.currentPage * 10) - 8)) {
+        this.loadNextTenMovies();
+      }
     });
   }
 
@@ -102,8 +107,6 @@ export default class App {
   }
 
   async loadNextTenMovies() {
-    console.log('swiper active index');
-    console.log(mySwiper.activeIndex);
     if ([0, 1].includes(mySwiper.activeIndex)) {
       return;
     }
@@ -111,11 +114,12 @@ export default class App {
       info.setInfoText(`No more results for "${this.currentSearch}"`);
       return;
     }
-    
+
     this.currentPage += 1;
     info.renderLoader();
+    // eslint-disable-next-line max-len
     const currentSearchReponse = await moviesStore.searchMovies(this.currentSearch, this.currentPage);
- 
+
     this.movieUI.renderSliderMovieItems(currentSearchReponse);
     this.imgSmoothLoadHandler();
     mySwiper.update();
@@ -123,6 +127,7 @@ export default class App {
     if (/[а-яА-Я]/g.test(formUI.inputValue) && this.isSearchRussian) info.setInfoText(`Showing result for "${formUI.inputValue}"`);
   }
 
+  // eslint-disable-next-line consistent-return
   async isRusInput(input) {
     if (/[а-яА-Я]/g.test(input)) {
       this.isSearchRussian = true;
@@ -134,23 +139,21 @@ export default class App {
     let userInputValue = formUI.inputValue;
     document.querySelector('.keyboard').classList.contains('keyboard--visible') ? document.querySelector('.keyboard').classList.remove('keyboard--visible') : null;
     if (/^.{0,1}$/.test(userInputValue)) {
-      console.log('userInputValue .... = ' + userInputValue);
       info.setInfoText('Please, type in at least 2 characters');
       return;
     }
     const translated = await this.isRusInput(userInputValue);
 
     translated ? userInputValue = translated : this.isSearchRussian = false;
-    
+
     userInputValue !== '' ? this.currentSearch = userInputValue : null;
     this.preRenderSliderHandler();
-    
+
     const currentSearchReponse = await moviesStore.searchMovies(userInputValue);
     this.totalSearchResults = moviesStore.getTotalResults();
-    console.log(currentSearchReponse);
 
     info.deleteLoader();
-    translated ? info.setInfoText(`Showing result for "${formUI.inputValue}"`) : null;
+    translated ? info.setInfoText(`Showing results for "${formUI.inputValue}"`) : null;
 
     if (!currentSearchReponse) {
       info.setInfoText(`Sorry, no results for "${this.currentSearch}"`);
@@ -158,10 +161,10 @@ export default class App {
       return;
     }
     if (currentSearchReponse.Response && !JSON.parse(currentSearchReponse.Response.toLowerCase())) {
-        info.setInfoText(currentSearchReponse.Error);
+      info.setInfoText(currentSearchReponse.Error);
       return;
     }
-    
+
 
     this.movieUI.renderSliderMovieItems(currentSearchReponse);
     this.imgSmoothLoadHandler();
