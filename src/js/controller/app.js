@@ -51,11 +51,18 @@ export default class App {
     document.addEventListener('click', (e) => {
       clearInputBtn.clearInputTextHandler(e, this.forUI.input);
       this.keyBoardIconHandler(e);
+      this.keyboardEnterClick(e);
     });
 
     mySwiper.on('reachEnd', () => {
       this.loadNextTenMovies();
     });
+  }
+
+  keyboardEnterClick(e) {
+    if (e.target.getAttribute('data') === 'Enter') {
+      this.onFormSubmit();
+    }
   }
 
   formSubmitInit() {
@@ -87,7 +94,6 @@ export default class App {
   }
 
   preRenderSliderHandler() {
-    document.querySelector('.keyboard').classList.contains('keyboard--visible') ? document.querySelector('.keyboard').classList.remove('keyboard--visible') : null;
     this.currentPage !== 1 ? this.currentPage = 1 : null;
     info.renderLoader();
     this.movieUI.clearSliderContainer();
@@ -126,6 +132,12 @@ export default class App {
 
   async onFormSubmit() {
     let userInputValue = formUI.inputValue;
+    document.querySelector('.keyboard').classList.contains('keyboard--visible') ? document.querySelector('.keyboard').classList.remove('keyboard--visible') : null;
+    if (/^.{0,1}$/.test(userInputValue)) {
+      console.log('userInputValue .... = ' + userInputValue);
+      info.setInfoText('Please, type in at least 2 characters');
+      return;
+    }
     const translated = await this.isRusInput(userInputValue);
 
     translated ? userInputValue = translated : this.isSearchRussian = false;

@@ -23,8 +23,7 @@ class Keyboard {
       this.initEventListeners();
   }
   initEventListeners() {
-      document.querySelector('.keyboard').addEventListener('mousedown', (e) => {
-          
+    this.keyboard.addEventListener('mousedown', (e) => { 
           if (e.target.classList.contains('key') ) {
               if (!e.target.classList.contains('key--special')) {
                   this.area.setRangeText(e.target.innerHTML, this.area.selectionStart, this.area.selectionEnd, 'end');
@@ -32,23 +31,21 @@ class Keyboard {
               this.capslockHandler(e);
               this.backspaceClickHandler(e);
               this.deleteClickHandler(e);
-              this.enterClickHandler(e);
               this.tabClickHandler(e);
               this.arrowClickHandler(e);
               this.languageSwitch(e);
               e.target.classList.add('key--press');                   
           }
       });
-      document.querySelector('.keyboard').addEventListener('mouseup', () => {
-          
-          document.querySelectorAll('.key').forEach(key => 
-              key.classList.contains('key--press') ? key.classList.remove('key--press') : null);
-              this.area.focus();
-      });
+      this.keyboard.addEventListener('mouseup', () => {
+        document.querySelectorAll('.key').forEach(key => {
+            key.classList.contains('key--press') ? key.classList.remove('key--press') : null;
+            this.area.focus();
+          });
+      }); 
   }
   capslockHandler(e) {
       if (e.target.getAttribute('data') === 'CapsLock') {
-        console.log('capslock!/....');
           this.capslock ? this.capslock = false : this.capslock = true;
           if(this.lang === 'rus' && this.capslock) {
                   this.changeKeyboardLang(this.rusKeysUp);
@@ -119,11 +116,6 @@ class Keyboard {
               this.area.setRangeText('', this.area.selectionStart, this.area.selectionEnd, 'end');
           }
       }
-  }
-
-  enterClickHandler(e) {
-    if (e.target.getAttribute('data') === 'Enter')
-      document.querySelector('.form').dispatchEvent(new Event('submit'));
   }
 
   arrowClickHandler(e) {
