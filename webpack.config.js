@@ -56,7 +56,7 @@ module.exports = (env, options) => {
             {
               loader: 'file-loader',
             },
-            {
+            /* {
               loader: 'image-webpack-loader',
               options: {
                 mozjpeg: {
@@ -79,7 +79,7 @@ module.exports = (env, options) => {
                   quality: 75,
                 },
               },
-            },
+            }, */
           ],
         },
         {

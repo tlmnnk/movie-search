@@ -58,7 +58,7 @@ export default class App {
     });
 
     mySwiper.on('slideChange', () => {
-      if (mySwiper.activeIndex === ((this.currentPage * 10) - 8)) {
+      if (mySwiper.activeIndex >= ((this.currentPage * 10) - 8)) {
         this.loadNextTenMovies();
       }
     });
