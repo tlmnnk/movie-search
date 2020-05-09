@@ -20,8 +20,8 @@ module.exports = (env, options) => {
     },
     resolve: {
       alias: {
-          '@': path.resolve(__dirname, './src'),
-      }
+        '@': path.resolve(__dirname, './src'),
+      },
     },
     module: {
       rules: [
@@ -61,7 +61,7 @@ module.exports = (env, options) => {
               options: {
                 mozjpeg: {
                   progressive: true,
-                  quality: 65
+                  quality: 65,
                 },
                 // optipng.enabled: false will disable optipng
                 optipng: {
@@ -69,18 +69,18 @@ module.exports = (env, options) => {
                 },
                 pngquant: {
                   quality: [0.65, 0.90],
-                  speed: 4
+                  speed: 4,
                 },
                 gifsicle: {
                   interlaced: false,
                 },
                 // the webp option will enable WEBP
                 webp: {
-                  quality: 75
-                }
-              }
+                  quality: 75,
+                },
+              },
             },
-          ]
+          ],
         },
         {
           test: /\.html$/i,
