@@ -136,7 +136,7 @@ export default class App {
   }
 
   async onFormSubmit() {
-    let userInputValue = formUI.inputValue;
+    let userInputValue = formUI.inputValue.trim();
     document.querySelector('.keyboard').classList.contains('keyboard--visible') ? document.querySelector('.keyboard').classList.remove('keyboard--visible') : null;
     if (/^.{0,1}$/.test(userInputValue)) {
       info.setInfoText('Please, type in at least 2 characters');
