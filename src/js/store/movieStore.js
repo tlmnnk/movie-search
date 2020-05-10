@@ -13,7 +13,6 @@ class MoviesStore {
 
   async searchMovies(movieTitle, page) {
     const response = await this.api.searchMovies(movieTitle, page);
-
     if (response) {
       if (!JSON.parse(response.Response.toLowerCase())) {
         return response;
@@ -32,15 +31,27 @@ class MoviesStore {
     return searchResult.reduce(async (acc, movieShortDesc) => {
       const sumArr = await acc;
       const fullDescMovie = await this.api.getMovieByID(movieShortDesc.imdbID);
-      let rating = fullDescMovie.Ratings[0] ? fullDescMovie.Ratings[0].Value : null;
-      rating ? rating = rating.slice(0, rating.indexOf('/')) : rating = 'N/A';
-      const tempObj = {
-        titleLink: `https://www.imdb.com/title/${fullDescMovie.imdbID}`,
-        title: fullDescMovie.Title,
-        year: fullDescMovie.Year,
-        poster: fullDescMovie.Poster !== 'N/A' ? fullDescMovie.Poster : '',
-        rating,
-      };
+      let tempObj = {};
+      if (fullDescMovie.Response === 'True') {
+        let rating = fullDescMovie.Ratings.length ? fullDescMovie.Ratings[0].Value : null;
+        rating ? rating = rating.slice(0, rating.indexOf('/')) : rating = 'N/A';
+        tempObj = {
+          titleLink: `https://www.imdb.com/title/${fullDescMovie.imdbID}`,
+          title: fullDescMovie.Title,
+          year: fullDescMovie.Year,
+          poster: fullDescMovie.Poster !== 'N/A' ? fullDescMovie.Poster : '',
+          rating,
+        };
+      } else {
+        tempObj = {
+          titleLink: `https://www.imdb.com/title/${movieShortDesc.imdbID}`,
+          title: movieShortDesc.Title,
+          year: movieShortDesc.Year,
+          poster: movieShortDesc.Poster !== 'N/A' ? movieShortDesc.Poster : '',
+          rating: 'N/A',
+        };
+      }
+
       sumArr.push(tempObj);
       return sumArr;
     }, []);
