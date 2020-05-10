@@ -1,5 +1,5 @@
 .keyboard {
-  width: 910px;
+  width: 731px;
 
   position: absolute;
   margin: 0 auto;
@@ -32,7 +32,7 @@
 .key {
   margin: 2px;
   padding: 20px;
-  min-width: 20px;
+  max-width: 30px;
   height: 20px;
   border-radius: 6px;
   display: flex;
@@ -46,15 +46,18 @@
   text-align: center;
 }
 .key--wide {
+  max-width: none;
   width: 100%;
 }
 .key--shift {
-  width: 150px;
+  width: 120px;
 }
 .key--special {
+  padding: 20px 12px;
   background-color: #31312c;
   border: 1px solid #743ad5;
   flex-grow: 1;
+  max-width: none;
 }
 .key--press {
   -webkit-box-shadow: inset 0px 0px 10px 2px rgb(158, 158, 158);
@@ -72,4 +75,11 @@ span[data=MetaLeft] {
 }
 span[data=Backspace] {
   width: 30px;
+}
+span[data=ArrowDown] {
+  width: 69px;
+}
+span[data=ArrowUp] {
+  width: 20px;
+  padding: 20px 10px;
 }

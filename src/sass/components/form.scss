@@ -85,5 +85,9 @@
     background-image: url("../../img/keyboard.svg");
     background-size: 60px;
     right: 29%;
+
+    &--light {
+      background-image: url("../../img/keyboard-light.svg");
+    }
   }
 }

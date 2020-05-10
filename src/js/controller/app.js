@@ -80,6 +80,7 @@ export default class App {
 
   keyBoardIconHandler(e) {
     if (e.target.classList.contains('form__keyboard')) {
+      e.target.classList.toggle('form__keyboard--light');
       keyboard.toggleKeyboard();
       this.forUI.input.focus();
     }
@@ -137,6 +138,7 @@ export default class App {
 
   async onFormSubmit() {
     let userInputValue = formUI.inputValue.trim();
+    document.querySelector('.form__keyboard--light') ? document.querySelector('.form__keyboard--light').classList.remove('form__keyboard--light') :  null;
     document.querySelector('.keyboard').classList.contains('keyboard--visible') ? document.querySelector('.keyboard').classList.remove('keyboard--visible') : null;
     if (/^.{0,1}$/.test(userInputValue)) {
       info.setInfoText('Please, type in at least 2 characters');
